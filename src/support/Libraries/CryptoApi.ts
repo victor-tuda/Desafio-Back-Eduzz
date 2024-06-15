@@ -1,26 +1,30 @@
 import Axios, { AxiosInstance } from 'axios';
-import { NextFunction, Request } from 'express';
 import Exception from '../../helpers/api-errors';
+import { TickerResponse } from '../../interfaces/crypto';
+import { Request } from 'express';
 
 class CryptoApi {
   private axios: AxiosInstance;
+  private readonly baseURL: string = 'https://www.mercadobitcoin.net/api';
 
   constructor() {
     this.axios = Axios.create({
+      baseURL: this.baseURL,
       headers: {
         'Content-Type': 'application/json'
       }
     });
   }
 
-  public async getCryptoApi(req:Request, next: NextFunction): Promise<any> {
+  public async getCryptoApi(req: Request): Promise<TickerResponse> {
     try {
-      const cryptoData = await this.axios.get<any>('https://www.mercadobitcoin.net/api/BTC/ticker', {params: {}});
-      console.log(cryptoData);
-
-      return cryptoData;
+      console.log('teste');
+      const response = await this.axios.get<TickerResponse>('/BTC/ticker');
+      console.log(response.data);
+      return response.data;
     } catch (error) {
-        next(new Exception(500, "Internal Server Error", req.path)); // TODO: refactor this line
+      console.error('Error fetching crypto data:', error);
+      throw new Exception(500, 'Internal Server Error', req.path);
     }
   }
 }
