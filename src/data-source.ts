@@ -1,8 +1,6 @@
-import 'reflect-metadata';
 import 'dotenv/config'
+import 'reflect-metadata';
 import { DataSource } from 'typeorm';
-import { Account } from './entities/Account';
-import { CreateAccount1718324356043 } from './database/migrations/1718324356043-CreateAccount';
 
 const port = process.env.DB_PORT as number | undefined
 
