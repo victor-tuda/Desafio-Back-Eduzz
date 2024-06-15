@@ -17,6 +17,7 @@
      "emitDecoratorMetadata": true, /* Enables experimental support for emitting type metadata for decorators. */
      /* Advanced Options */
      "skipLibCheck": true, /* Skip type checking of declaration files. */
-     "forceConsistentCasingInFileNames": true
+     "forceConsistentCasingInFileNames": true,
+     "typeRoots": ["./src/@types"], // Declaring where will be saved the @types libraries made by me
    }
  }
