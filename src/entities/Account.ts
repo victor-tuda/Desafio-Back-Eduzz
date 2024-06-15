@@ -8,6 +8,12 @@ export class Account {
     id: string
 
     @Column()
+    name: string
+
+    @Column()
+    balance: string
+
+    @Column()
     email: string
 
     @Column()
