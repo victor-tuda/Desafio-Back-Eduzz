@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { accountRepository } from '../repositories/AccountRepository';
+import AccountService from '../services/AccountService'
 import Exception from '../helpers/api-errors';
 import bcrypt from 'bcrypt';
 
@@ -24,10 +25,9 @@ class AccountController {
       const newAccount = accountRepository.create({
         name,
         email,
+        balance: "0",
         password: hashPassword
       });
-
-      console.log(newAccount);
 
       // Save into the database
       await accountRepository.save(newAccount);
@@ -45,6 +45,20 @@ class AccountController {
   async getAccount(req: Request, res: Response, next: NextFunction) {
     try {
       return res.json(req.account);
+    } catch (error) {
+      next(new Exception(500, 'Internal Server Error', req.path)); // TODO: refactor this line
+    }
+  }
+
+  async deposit(req: Request, res: Response, next: NextFunction) {
+    try {
+      const amount = req.body.amount
+      const { id } = req.account
+
+      const deposit = await AccountService.deposit(amount, id);
+      
+
+      return res.json(deposit);
     } catch (error) {
       next(new Exception(500, 'Internal Server Error', req.path)); // TODO: refactor this line
     }
