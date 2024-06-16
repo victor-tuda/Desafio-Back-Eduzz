@@ -18,9 +18,7 @@ class CryptoApi {
 
   public async getCryptoApi(req: Request): Promise<TickerResponse> {
     try {
-      console.log('teste');
       const response = await this.axios.get<TickerResponse>('/BTC/ticker');
-      console.log(response.data);
       return response.data;
     } catch (error) {
       console.error('Error fetching crypto data:', error);
