@@ -1,14 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
-import Exception from '../helpers/api-errors';
+import Exception from '../helpers/exception';
 
 const handleErrors = (err: Error, req: Request, res: Response, next: NextFunction) => {
-
   if (err instanceof Exception) {
-    return res.status(err.getStatus()).json({
+    return res.status((err as Exception).getStatus()).json({
       success: false,
       error: {
-        message: err.getMessage(),
-        path: err.getPath()
+        message: (err as Exception).getMessage(),
+        path: (err as Exception).getPath()
       }
     });
   }

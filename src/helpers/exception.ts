@@ -1,14 +1,11 @@
-
-
 class Exception extends Error {
   private status: number;
   private error: string;
   private path: string;
 
-  constructor(status: any, error: any, path: any) {
-    console.log(error)
-	super(error);
-
+  constructor(status: number, error: string | any, path: string) {
+    super(error);
+    Object.setPrototypeOf(this, Exception.prototype);
 
     this.status = status;
     this.error = error;

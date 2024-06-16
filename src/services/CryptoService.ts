@@ -1,17 +1,12 @@
 import { CotationResponse, TickerResponse } from '../interfaces/crypto';
 import CryptoApi from '../support/Libraries/CryptoApi';
-import Exception from '../helpers/api-errors';
 import { Request } from 'express';
 
 class CryptoService {
-  public async getCryptoApi(req: Request): Promise<CotationResponse> {
-    try {
-      const crypto = await CryptoApi.getCryptoApi(req);
-      const cryptoCotation = this.cotationData(crypto);
-      return cryptoCotation;
-    } catch (error) {
-      throw new Exception(500, 'Internal Server Error', req.path);
-    }
+  public async getCryptoApi(): Promise<CotationResponse> {
+    const crypto = await CryptoApi.getCryptoApi();
+    const cryptoCotation = this.cotationData(crypto);
+    return cryptoCotation;
   }
 
   private cotationData(crypto: TickerResponse): CotationResponse {
