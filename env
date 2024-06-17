@@ -1,0 +1,12 @@
+DB_TYPE=mysql
+DB_HOST=eduzz-mysql.cinb14ueuryw.us-west-2.rds.amazonaws.com
+DB_PORT=3306
+DB_USER=admin
+DB_PASS=Eduzz_001
+DB_DATABASE=desafio_crypto
+
+JWT_PASS=$2b$12$Hxbd1LXP/KW/HjCGNlnBzu2r87so5MHezFvgb5tIFCuGMfALqXYRm
+
+SENDGRID_API_KEY=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
+
+#obs: só estou disponibilizando as envs para facilitar a execução, mas entendo que não é uma boa pŕatica
