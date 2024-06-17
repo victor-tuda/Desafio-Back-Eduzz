@@ -1,5 +1,6 @@
 import { accountRepository } from '../repositories/AccountRepository';
 import { investmentRepository } from '../repositories/InvestmentRepository';
+import EmailService from '../services/EmailService';
 import { CotationResponse, TickerResponse, BuyCrypto } from '../interfaces/crypto';
 import { Account as AccountEntity } from '../entities/Account';
 import CryptoApi from '../support/Libraries/CryptoApi';
@@ -16,7 +17,7 @@ class CryptoService {
     try {
       // Get the account using the id
       const accountFromDB = await accountRepository.findOneBy({ id });
-      const { name, balance }: any = accountFromDB;
+      const { name, email, balance }: any = accountFromDB;
 
       // Capture the current state of bitcoin
       const btc_return = await this.getCryptoApi();
@@ -41,6 +42,12 @@ class CryptoService {
 
         await investmentRepository.save(newInvestment);
 
+        await EmailService.sendEmail(
+          email,
+          'A purchase has been made!',
+          `A new amount of ${calculateInvestment} BTCs has been added to your account!`
+        );
+
         const cryptoReturn = this.buyCryptoTemplate(id, name, amount, calculateInvestment);
         return cryptoReturn;
       } else {
@@ -62,11 +69,9 @@ class CryptoService {
 
       // Capture the current state of bitcoin
       //const btc_return = await this.getCryptoApi();
-      
-      return investmentsFromDB
 
-
-      } catch (error) {}
+      return investmentsFromDB;
+    } catch (error) {}
   }
 
   private buyCryptoTemplate(id: any, name: any, value_invested: string, btc_received: string): BuyCrypto {

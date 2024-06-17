@@ -2,6 +2,7 @@ import { accountRepository } from '../repositories/AccountRepository';
 import Exception from '../helpers/exception';
 import { AccountDeposit, Account } from '../interfaces/account';
 import { Account as AccountEntity } from '../entities/Account';
+import EmailService from '../services/EmailService'
 import bcrypt from 'bcrypt';
 
 class AccountService {
@@ -32,10 +33,12 @@ class AccountService {
     // TO-DO: Validation for balance be a positive value
 
     const newAmount = String(parseFloat(balance) + parseFloat(amount));
-
+  
     await accountRepository.createQueryBuilder().update(AccountEntity).set({ balance: newAmount }).where('id = :id', { id }).execute();
 
     const accountNewBalance = this.accountData(id, name, email, newAmount);
+
+    await EmailService.sendEmail(email, "A deposit has been made!", `A deposit of ${amount} reais has been made to your account!`)
 
     return accountNewBalance;
   }

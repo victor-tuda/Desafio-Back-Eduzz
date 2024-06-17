@@ -12,7 +12,7 @@ AppDataSource.initialize()
     app.use(routers);
     app.use(handleErrors);
 
-    app.listen(3000, () => {
+    app.listen(3001, () => {
       console.log('Server started');
     });
   })
