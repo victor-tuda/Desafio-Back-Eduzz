@@ -15,11 +15,10 @@ class CryptoController {
     try {
       // Call Crypto Service
       const { id } = req.account;
-      const { amount } = req.body
+      const { amount } = req.body;
       const cryptoBuy = await CryptoService.buyCrypto(amount, id);
 
-      return res.json(cryptoBuy)
-
+      return res.json(cryptoBuy);
     } catch (error) {
       next(error);
     }
@@ -33,14 +32,10 @@ class CryptoController {
       const getPosition = await CryptoService.getPosition(id);
 
       return res.json(getPosition);
-
     } catch (error) {
       next(error);
     }
   }
-
-
-
 }
 
 export default new CryptoController();

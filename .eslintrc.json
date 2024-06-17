@@ -1,41 +1,49 @@
 {
-    "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint", "prettier"],
-    "extends": [
-      "plugin:prettier/recommended"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 10,
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "modules": true
-      }
-    },
-    "env": {
-      "node": true
-    },
-    "rules": {
-      "max-depth": ["warn", 3],
-      "no-restricted-imports": ["error"],
-      "linebreak-style": ["error", "unix"],
-      "max-len": ["error", 150, 2, {
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"],
+  "extends": ["plugin:prettier/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 10,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true
+    }
+  },
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "max-depth": ["warn", 3],
+    "no-restricted-imports": ["error"],
+    "linebreak-style": ["error", "unix"],
+    "max-len": [
+      "error",
+      150,
+      2,
+      {
         "ignorePattern": "^(import|export)",
         "ignoreUrls": true
-      }],
-      "constructor-super": ["warn"],
-      "no-return-await": ["error"],
-      "no-multiple-empty-lines": ["error", {
+      }
+    ],
+    "constructor-super": ["warn"],
+    "no-return-await": ["error"],
+    "no-multiple-empty-lines": [
+      "error",
+      {
         "max": 1
-      }],
-      "no-trailing-spaces": ["error"],
-      "no-extra-semi": ["error"],
-      "no-var": ["error"],
-      "quotes": ["error", "single", { "avoidEscape": true }],
-      "object-shorthand": ["error"],
-      "semi": ["error", "always"],
-      "@typescript-eslint/no-unused-vars": ["warn"],
-      "@typescript-eslint/adjacent-overload-signatures": ["error"],
-      "@typescript-eslint/explicit-member-accessibility": ["error", {
+      }
+    ],
+    "no-trailing-spaces": ["error"],
+    "no-extra-semi": ["error"],
+    "no-var": ["error"],
+    "quotes": ["error", "single", { "avoidEscape": true }],
+    "object-shorthand": ["error"],
+    "semi": ["error", "always"],
+    "@typescript-eslint/no-unused-vars": ["warn"],
+    "@typescript-eslint/adjacent-overload-signatures": ["error"],
+    "@typescript-eslint/explicit-member-accessibility": [
+      "error",
+      {
         "accessibility": "explicit",
         "overrides": {
           "accessors": "explicit",
@@ -44,9 +52,10 @@
           "properties": "explicit",
           "parameterProperties": "explicit"
         }
-      }],
-      "@typescript-eslint/member-ordering": ["error"],
-      "@typescript-eslint/no-namespace": ["error"],
-      "@typescript-eslint/no-require-imports": ["error"]
-    }
+      }
+    ],
+    "@typescript-eslint/member-ordering": ["error"],
+    "@typescript-eslint/no-namespace": ["error"],
+    "@typescript-eslint/no-require-imports": ["error"]
   }
+}

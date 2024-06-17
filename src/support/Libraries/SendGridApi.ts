@@ -1,4 +1,4 @@
-import Exception from '../../helpers/exception'
+import Exception from '../../helpers/exception';
 import sgMail from '@sendgrid/mail';
 
 // Defina a chave de API. Certifique-se de usar variáveis de ambiente para segurança.

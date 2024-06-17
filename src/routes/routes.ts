@@ -3,9 +3,11 @@ import Router from 'express';
 import AccountController from '../controllers/AccountController';
 import CryptoController from '../controllers/CryptoController';
 import LoginController from '../controllers/LoginController';
+import IndexController from '../controllers/IndexController';
 
 const routers = Router();
 
+routers.get('/', IndexController.index);
 routers.post('/account', AccountController.create); // Create a new account
 routers.post('/login', LoginController.login); // Login to receive the token
 
@@ -17,6 +19,6 @@ routers.post('/account/deposit', AccountController.deposit);
 
 routers.get('/btc', CryptoController.getPosition); // Get informations about crypto
 routers.get('/btc/price', CryptoController.getCryptoApi); // Get informations about crypto
-routers.post('/btc/purchase', CryptoController.buyCrypto) // Creat Controler method
+routers.post('/btc/purchase', CryptoController.buyCrypto); // Creat Controler method
 
 export default routers;
