@@ -109,7 +109,7 @@ Posição dos investimentos:
 
 - O Cliente deve poder ver a posição de seus investimentos com as informações: data de compra, valor investido, valor do btc no momento da compra, percentual de variação do preço do bitcoin e valor bruto atual do investimento.
 
-- **URL:**[localhost:3000/btc](localhost:3000/btc)
+- **URL:** [localhost:3000/btc](localhost:3000/btc)
 - **Método:** `GET`
 
 ## Arquitetura:
@@ -165,7 +165,7 @@ Requisições para APIs externas
 ### Docker
 
 1. Execute o comando `docker pull public.ecr.aws/o1m9o1h7/eduzz-ecr:latest`
-2. Em seguida: `public.ecr.aws/o1m9o1h7/eduzz-ecr:latest`
+2. Em seguida: `docker run public.ecr.aws/o1m9o1h7/eduzz-ecr:latest`
 
 ## URLs
 
