@@ -62,7 +62,12 @@ Depósitos:
 - **URL:** [localhost:3000/account/deposit](localhost:3000/account/deposit)
 
 - **Método:** `POST`
-
+- **Body:**
+  ```json
+  {
+    "amount": 1000
+  }
+  ```
 ---
 
 Saldo:
@@ -92,7 +97,12 @@ Compra:
 
 - **URL:** [localhost:3000/btc/purchase](localhost:3000/btc/purchase)
 - **Método:** `POST`
-
+- **Body:**
+  ```json
+  {
+    "amount": 1000
+  }
+  ```
 ---
 
 Posição dos investimentos:
