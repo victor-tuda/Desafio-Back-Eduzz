@@ -175,11 +175,9 @@ Produção: [35.90.48.100:3000](35.90.48.100:3000)
 
 Desenvolvimento: [http://localhost:3000/api](http://localhost:3000/)
 
-_OBS: O ambiente em produção está uma versão anterior ao ambiente dev, ou seja, ainda não está executando a feature de disparo de e-mails._
+_OBS: A API estará rodando na porta 3000 (caso você não tenha setado uma variável de ambiente)._
 
-_OBS2: A API estará rodando na porta 3000 (caso você não tenha setado uma variável de ambiente)._
-
-_OBS3: Estou deixando o arquivo .env para que seja possível a execução._
+_OBS2: Estou deixando o arquivo .env para que seja possível a execução._
 
 
 
