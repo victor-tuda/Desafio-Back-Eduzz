@@ -157,7 +157,7 @@ Requisições para APIs externas
 ### Npm
 
 1. Instale o [NodeJs](https://nodejs.org/en/);
-2. Clone o repositório;
+2. Clone o repositório (https://github.com/victor-tuda/Desafio-Back-Eduzz);
 3. Acesse a pasta do projeto e execute o comando `npm install` para instalar todas às dependências;
 4. Rode `npm run typeorm migration:run` para criar as tabelas do banco de dados;
 5. Assim que a instalação terminar, digite o comando `npm run dev:server`;
@@ -168,12 +168,18 @@ Requisições para APIs externas
 
 ## URLs
 
-A aplicação está rodando no EC2 da AWS e pode ser acessada através da URL abaixo:
+A aplicação está rodando no ECS da AWS e pode ser acessada através da URL abaixo:
 
-Produção: [35.85.64.133:3000](35.85.64.133:3000)
+Produção: [34.214.193.165:3000](35.85.64.133:3000)
 
 Desenvolvimento: [http://localhost:3000/api](http://localhost:3000/)
 
-_OBS: A API estará rodando na porta 3000 (caso você não tenha setado uma variável de ambiente)._
+_OBS: O ambiente em produção está uma versão anterior ao ambiente dev, ou seja, ainda não está executando a feature de disparo de e-mails._
 
-_OBS2: Estou deixando o arquivo .env para que seja possível a execução._
+_OBS2: A API estará rodando na porta 3000 (caso você não tenha setado uma variável de ambiente)._
+
+_OBS3: Estou deixando o arquivo .env para que seja possível a execução._
+
+
+
+
