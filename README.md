@@ -164,13 +164,14 @@ Requisições para APIs externas
 
 ### Docker
 
-1. Execute o comando `docker compose up`
+1. Execute o comando `docker pull public.ecr.aws/o1m9o1h7/eduzz-ecr:latest`
+2. Em seguida: `public.ecr.aws/o1m9o1h7/eduzz-ecr:latest`
 
 ## URLs
 
 A aplicação está rodando no ECS da AWS e pode ser acessada através da URL abaixo:
 
-Produção: [34.214.193.165:3000](35.85.64.133:3000)
+Produção: [35.90.48.100:3000](35.90.48.100:3000)
 
 Desenvolvimento: [http://localhost:3000/api](http://localhost:3000/)
 
