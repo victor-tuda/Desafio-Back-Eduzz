@@ -1,10 +1,10 @@
 import Exception from '../../helpers/exception';
 import sgMail from '@sendgrid/mail';
 
-// Defina a chave de API. Certifique-se de usar variáveis de ambiente para segurança.
-sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
+const apiKey = process.env.SENDGRID_API_KEY;
 
-// Definição da interface para a mensagem de e-mail
+sgMail.setApiKey(apiKey as string);
+
 interface EmailMessage {
   to: string;
   from: string;
@@ -12,9 +12,9 @@ interface EmailMessage {
   html: string;
 }
 
-// Função para enviar e-mail
 export const sendEmail = async (msg: EmailMessage): Promise<any> => {
   try {
+    console.log(apiKey)
     return await sgMail.send(msg);
   } catch (error) {
     throw new Exception(500, 'Internal Server Error', 'crypto');

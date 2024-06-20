@@ -3,11 +3,11 @@ import Exception from '../helpers/exception';
 
 const handleErrors = (err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof Exception) {
-    return res.status((err as Exception).getStatus()).json({
+    return res.status(err.getStatus()).json({
       success: false,
       error: {
-        message: (err as Exception).getMessage(),
-        path: (err as Exception).getPath()
+        message: err.getMessage(),
+        path: err.getPath()
       }
     });
   }
@@ -17,7 +17,7 @@ const handleErrors = (err: Error, req: Request, res: Response, next: NextFunctio
       success: false,
       error: {
         message: 'Connection request timeout.',
-        path: 'localhost:3000'
+        path: req.path
       }
     });
   }
@@ -26,7 +26,7 @@ const handleErrors = (err: Error, req: Request, res: Response, next: NextFunctio
     success: false,
     error: {
       message: 'Internal Server Error',
-      path: 'localhost:3000'
+      path: req.path
     }
   });
 };

@@ -7,40 +7,60 @@ import bcrypt from 'bcrypt';
 
 class AccountService {
   public async create(name: string, email: string, password: string): Promise<Account> {
-    const accountExists = await accountRepository.findOneBy({ email });
-    if (accountExists) {
-      throw new Exception(401, 'E-mail already exists', '/account');
+    try {
+      const accountExists = await accountRepository.findOneBy({ email });
+      if (accountExists) {
+        throw new Exception(401, 'E-mail already exists', '/account');
+      }
+
+      const hashPassword = await bcrypt.hash(password, 10);
+      const newAccount = accountRepository.create({
+        name,
+        email,
+        balance: '0',
+        password: hashPassword
+      });
+
+      await accountRepository.save(newAccount);
+      const { password: _, ...accountData } = newAccount;
+
+      return accountData;
+    } catch (error) {
+      throw new Exception(500, 'Internal Server Error', '/account');
     }
+  }
 
-    const hashPassword = await bcrypt.hash(password, 10);
-    const newAccount = accountRepository.create({
-      name,
-      email,
-      balance: '0',
-      password: hashPassword
-    });
+  public async getAccount(accountData: Account | any): Promise<Account | any> {
+    try {
+      if (!accountData) throw new Exception(404, 'Account not found. Do a POST at login route in API', '/account');
+      return accountData;
+    } catch (error) {
+      throw new Exception(500, 'Internal Server Error', '/account');
+    }
+  }
 
-    await accountRepository.save(newAccount);
-    const { password: _, ...accountData } = newAccount;
-
-    return accountData;
+  public async getAccountBalance(accountData: Account | any): Promise<string | any> {
+    if (!accountData) throw new Exception(404, 'Account not found. Do a POST at login route in API', '/account/balance');
+    return {
+      balance: accountData.balance
+    };
   }
 
   public async deposit(amount: string, id: any): Promise<AccountDeposit> {
-    const accountFromDB = await accountRepository.findOneBy({ id });
-    const { name, email, balance }: any = accountFromDB;
+    try {
+      const accountFromDB = await accountRepository.findOneBy({ id });
+      const { name, email, balance }: any = accountFromDB;
 
-    // TO-DO: Validation for balance be a positive value
+      const newAmount = String(parseFloat(balance) + parseFloat(amount));
+      await accountRepository.createQueryBuilder().update(AccountEntity).set({ balance: newAmount }).where('id = :id', { id }).execute();
 
-    const newAmount = String(parseFloat(balance) + parseFloat(amount));
+      await EmailService.sendEmail(email, 'A deposit has been made!', `A deposit of ${amount} reais has been made to your account!`);
 
-    await accountRepository.createQueryBuilder().update(AccountEntity).set({ balance: newAmount }).where('id = :id', { id }).execute();
-
-    const accountNewBalance = this.accountData(id, name, email, newAmount);
-
-    await EmailService.sendEmail(email, 'A deposit has been made!', `A deposit of ${amount} reais has been made to your account!`);
-
-    return accountNewBalance;
+      const accountNewBalance = this.accountData(id, name, email, newAmount);
+      return accountNewBalance;
+    } catch (error) {
+      throw new Exception(500, 'Internal Server Error', '/account/deposit');
+    }
   }
 
   private accountData(id: string, name: string, email: string, newAmount: string): AccountDeposit {

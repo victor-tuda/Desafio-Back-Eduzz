@@ -8,13 +8,13 @@ class LoginService {
     const account = await accountRepository.findOneBy({ email });
 
     if (!account) {
-      throw new Exception(401, 'Invalid e-mail or password', 'login');
+      throw new Exception(401, 'Invalid email or password', 'login');
     }
 
     const verifyPass = await bcrypt.compare(password, account.password);
 
     if (!verifyPass) {
-      throw new Exception(401, 'Invalid e-mail or password', 'login');
+      throw new Exception(401, 'Invalid email or password', 'login');
     }
 
     const token = jwt.sign({ id: account.id }, process.env.JWT_PASS ?? '', { expiresIn: '8h' });

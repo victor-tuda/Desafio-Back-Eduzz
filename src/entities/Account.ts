@@ -18,7 +18,6 @@ export class Account {
   @Column()
   password: string;
 
-  // Constructor que gera um id caso o campo venha vazio
   constructor() {
     if (!this.id) {
       this.id = uuid();

@@ -14,17 +14,19 @@ class AccountController {
 
   async getAccount(req: Request, res: Response, next: NextFunction) {
     try {
-      return res.json(req.account);
+      const accountData = req.account;
+      const account = await AccountService.getAccount(accountData);
+      return res.status(200).json(account);
     } catch (error) {
       next(error);
     }
   }
 
-  async getAccountBallance(req: Request, res: Response, next: NextFunction) {
+  async getAccountBalance(req: Request, res: Response, next: NextFunction) {
     try {
-      return res.json({
-        balance: req.account.balance
-      });
+      const accountData = req.account;
+      const balance = await AccountService.getAccountBalance(accountData);
+      return res.status(200).json(balance);
     } catch (error) {
       next(error);
     }
@@ -35,7 +37,7 @@ class AccountController {
       const amount = req.body.amount;
       const { id } = req.account;
       const deposit = await AccountService.deposit(amount, id);
-      return res.json(deposit);
+      return res.status(201).json(deposit);
     } catch (error) {
       next(error);
     }

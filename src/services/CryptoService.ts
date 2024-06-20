@@ -4,18 +4,21 @@ import EmailService from '../services/EmailService';
 import { CotationResponse, TickerResponse, BuyCrypto } from '../interfaces/crypto';
 import { Account as AccountEntity } from '../entities/Account';
 import CryptoApi from '../support/Libraries/CryptoApi';
-import { Request } from 'express';
+import Exception from '../helpers/exception';
 
 class CryptoService {
   public async getCryptoApi(): Promise<CotationResponse> {
-    const crypto = await CryptoApi.getCryptoApi();
-    const cryptoCotation = this.cotationData(crypto);
-    return cryptoCotation;
+    try {
+      const crypto = await CryptoApi.getCryptoApi();
+      const cryptoCotation = this.cotationData(crypto);
+      return cryptoCotation;
+    } catch (error) {
+      throw new Exception(500, 'Internal Server Error', '/btc/price');
+    }
   }
 
   public async buyCrypto(amount: string, id: any) {
     try {
-      // Get the account using the id
       const accountFromDB = await accountRepository.findOneBy({ id });
       const { name, email, balance }: any = accountFromDB;
 
@@ -55,7 +58,9 @@ class CryptoService {
           operation_failed: 'Invalid value for amount'
         };
       }
-    } catch (error) {}
+    } catch (error) {
+      throw new Exception(500, 'Internal Server Error', '/btc/purchase');
+    }
   }
 
   public async getPosition(id: any) {
@@ -71,7 +76,9 @@ class CryptoService {
       //const btc_return = await this.getCryptoApi();
 
       return investmentsFromDB;
-    } catch (error) {}
+    } catch (error) {
+      throw new Exception(500, 'Internal Server Error', '/btc');
+    }
   }
 
   private buyCryptoTemplate(id: any, name: any, value_invested: string, btc_received: string): BuyCrypto {
