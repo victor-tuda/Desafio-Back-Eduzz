@@ -171,7 +171,7 @@ Requisições para APIs externas
 
 A aplicação está rodando no ECS da AWS e pode ser acessada através da URL abaixo:
 
-Produção: [35.90.48.100:3000](35.90.48.100:3000)
+Produção: [34.219.119.78:3000](35.90.48.100:3000)
 
 Desenvolvimento: [http://localhost:3000/api](http://localhost:3000/)
 
